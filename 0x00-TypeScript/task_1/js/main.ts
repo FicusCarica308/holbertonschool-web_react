@@ -1,6 +1,6 @@
 // Task(1) - an interface named Teacher
 
-/* Interface */
+/* Interface's */
 interface Teacher {
     firstName: string,
     lastName: string,
@@ -10,13 +10,17 @@ interface Teacher {
     [key: string]: any, // Optional key / value
 }
 
+interface Directors extends Teacher{
+    numberOfReports: number,
+}
+
 /* Test code */
 const teacherNoOptional: Teacher = {
     firstName: 'John',
     lastName: 'Doe',
     fullTimeEmployee: true,
     location: 'Connecticut'
-}
+};
 
 const teacherOneOptional: Teacher = {
     firstName: 'Rock',
@@ -24,7 +28,7 @@ const teacherOneOptional: Teacher = {
     fullTimeEmployee: false,
     yearsOfExperience: 8,
     location: 'Florida'
-}
+};
 
 const teacherTwoOptional: Teacher = {
     firstName: 'Jack',
@@ -33,8 +37,17 @@ const teacherTwoOptional: Teacher = {
     yearsOfExperience: 8,
     location: 'Montana',
     contract: false,
-}
+};
+
+const directorTest: Directors = {
+    firstName: 'Santa',
+    lastName: 'Claus',
+    location: 'The North Pole',
+    fullTimeEmployee: true,
+    numberOfReports: 17,
+};
 
 console.log("Teacher object with not optional keys", teacherNoOptional);
 console.log("Teacher object with one optional key: key = yearsOfExperience", teacherOneOptional);
 console.log("Teacher object with two optional keys: (key = yearsOfExperience & key(random) = value(random))", teacherTwoOptional);
+console.log("Director test: ", directorTest);
