@@ -1,6 +1,16 @@
 // Task(1) - an interface named Teacher
 
-/* Interface's */
+/* Function Interfaces */
+interface printTeacherFunction {
+    (firstName: string, lastName: string): string, 
+}
+
+/* Functions */
+function printTeacher(firstName: string, lastName: string):string {
+    return (`${firstName[0]}. ${lastName}`);
+}
+
+/* Regular Interfaces */
 interface Teacher {
     firstName: string,
     lastName: string,
@@ -51,3 +61,6 @@ console.log("Teacher object with not optional keys", teacherNoOptional);
 console.log("Teacher object with one optional key: key = yearsOfExperience", teacherOneOptional);
 console.log("Teacher object with two optional keys: (key = yearsOfExperience & key(random) = value(random))", teacherTwoOptional);
 console.log("Director test: ", directorTest);
+
+let testPrintTeacher: printTeacherFunction = printTeacher;
+console.log(testPrintTeacher(directorTest.firstName, directorTest.lastName));
