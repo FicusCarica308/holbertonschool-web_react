@@ -1,4 +1,4 @@
-// Task(1) - an interface named Teacher
+// Task(1 - 4)
 
 /* Function Interfaces */
 interface printTeacherFunction {
@@ -9,6 +9,35 @@ interface printTeacherFunction {
 function printTeacher(firstName: string, lastName: string):string {
     return (`${firstName[0]}. ${lastName}`);
 }
+
+/* Class interfaces */
+type homeworkStatusRes = "Currently working"
+
+interface studentClassContract {
+    firstName: string,
+    lastName: string,
+    workOnHomework: () => homeworkStatusRes,
+    displayName: () => string,
+}
+
+/* Classes */
+class StudentClass implements studentClassContract{
+    firstName: string;
+    lastName: string;
+   
+    constructor(firstName: string, lastName: string) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+
+    workOnHomework():homeworkStatusRes {
+        return ("Currently working");
+    }
+
+    displayName():string {
+        return (this.firstName);
+    }
+  }
 
 /* Regular Interfaces */
 interface Teacher {
@@ -24,7 +53,7 @@ interface Directors extends Teacher{
     numberOfReports: number,
 }
 
-/* Test code */
+/* Test code ===============================*/
 const teacherNoOptional: Teacher = {
     firstName: 'John',
     lastName: 'Doe',
@@ -64,3 +93,10 @@ console.log("Director test: ", directorTest);
 
 let testPrintTeacher: printTeacherFunction = printTeacher;
 console.log(testPrintTeacher(directorTest.firstName, directorTest.lastName));
+
+let testClass = new StudentClass("John", "doe");
+
+console.log("(StudentClasstest) created new StudentClass instance: firstName = John, lastName = doe")
+
+console.log("(StudentClasstest) testing displayName() function - Output:", testClass.displayName());
+console.log("(StudentClasstest) test workOnHomework() function - Output:", testClass.workOnHomework());
