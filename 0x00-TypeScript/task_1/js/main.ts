@@ -1,37 +1,40 @@
-// Task(0) - an interface named Student
+// Task(1) - an interface named Teacher
 
-interface Student {
+/* Interface */
+interface Teacher {
     firstName: string,
     lastName: string,
-    age: number,
+    fullTimeEmployee: boolean,
+    yearsOfExperience?: number, // Option yearsOfExperience
     location: string,
+    [key: string]: any, // Optional key / value
 }
 
-function buildTable(studentList : any) {
-    const table : HTMLTableElement = document.createElement('table');
-    let tableContents : string = `<thead><tr><th>FirstName</th><th>location</th></tr></thead><tbody>`;
-    for (const student of studentList) {
-        tableContents += `<tr><td>${student.firstName}</td><td>${student.location}</td></tr>`;
-    }
-    table.innerHTML = tableContents += '</tbody>';
-    table.border = '1px solid black';
-    document.body.appendChild(table);
-}
-
-const student1: Student = {
+/* Test code */
+const teacherNoOptional: Teacher = {
     firstName: 'John',
     lastName: 'Doe',
-    age: 38,
-    location: 'United States'
+    fullTimeEmployee: true,
+    location: 'Connecticut'
 }
 
-const student2: Student = {
-    firstName: 'Ann',
-    lastName: 'Chovy',
-    age: 1,
-    location: 'The Ocean'
+const teacherOneOptional: Teacher = {
+    firstName: 'Rock',
+    lastName: 'Stone',
+    fullTimeEmployee: false,
+    yearsOfExperience: 8,
+    location: 'Florida'
 }
 
-const studentsList : Array<Student> = [student1, student2];
+const teacherTwoOptional: Teacher = {
+    firstName: 'Jack',
+    lastName: 'stand',
+    fullTimeEmployee: false,
+    yearsOfExperience: 8,
+    location: 'Montana',
+    contract: false,
+}
 
-buildTable(studentsList);
+console.log("Teacher object with not optional keys", teacherNoOptional);
+console.log("Teacher object with one optional key: key = yearsOfExperience", teacherOneOptional);
+console.log("Teacher object with two optional keys: (key = yearsOfExperience & key(random) = value(random))", teacherTwoOptional);
