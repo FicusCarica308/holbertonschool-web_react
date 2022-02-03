@@ -1,83 +1,19 @@
-// Task(2)
+/// <reference path="crud.d.ts" />
+import {RowElement, RowID} from "./interface"
+import * as CRUD from './crud'
+import { insertRow, updateRow } from "./crud"
 
-/* Director Interface & Class */
-interface DirectorInterface {
-    workFromHome(): string,
-    getCoffeeBreak(): string,
-    workDirectorTasks(): string,
-} 
-
-class Director implements DirectorInterface {
-    workFromHome(): string {
-        return ('Working from home');
-    }
-    getCoffeeBreak(): string {
-        return ('Getting a coffee break');
-    }
-    workDirectorTasks(): string {
-        return ('Getting to director tasks');
-    }
+const row: RowElement = {
+    firstName: 'Guillaume',
+    lastName: 'Salva',
 }
+console.log('row =', row);
 
-/* Teacher Interface & Class */
-interface TeacherInterface{
-    workFromHome(): string,
-    getCoffeeBreak(): string,
-    workTeacherTasks(): string,
-}
+const newRowID: RowID = CRUD.insertRow(row);
+console.log('newRowID = ', newRowID);
 
-class Teacher implements TeacherInterface {
-    workFromHome(): string {
-        return ('Cannot work from home');
-    }
-    getCoffeeBreak(): string {
-        return ('Cannot have a break');
-    }
-    workTeacherTasks(): string {
-        return ('Getting to work');
-    }
-}
+const updatedRow: RowElement =  Object.assign(row, {age: 23});
+console.log('updatedRow =', updatedRow);
 
-/* Teacher and Director functions */
-
-function createEmployee(salary: number | string): Director | Teacher {
-    if (salary < 500) {
-        return (new Teacher());
-    }
-    return (new Director());
-}
-
-function isDirector(employee: any): employee is Director {
-    return typeof employee.workDirectorTasks === 'function';
-}
-
-function executeWork(employee: any): string {
-    if (isDirector(employee) === false) {
-        return (employee.workTeacherTasks());
-    } else {
-        return (employee.workDirectorTasks());
-    }
-}
-
-console.log(createEmployee(200));
-console.log(createEmployee(1000));
-console.log(createEmployee('$500'));
-
-console.log(executeWork(createEmployee(200)));
-console.log(executeWork(createEmployee(1000)));
-
-/* ======== END */
-
-/* String literal types */
-type Subjects = 'Math' | 'History'
-
-function teachClass(todayClass: Subjects): string {
-    if (todayClass === 'Math') {
-        return ('Teaching Math')
-    } else if (todayClass === 'History') {
-        return ('Teaching History')
-    }
-}
-
-console.log(teachClass('Math'));
-console.log(teachClass('History'));
+CRUD.updateRow(newRowID, updatedRow);
+CRUD.deleteRow(newRowID);
