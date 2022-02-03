@@ -38,6 +38,8 @@ class Teacher implements TeacherInterface {
     }
 }
 
+/* Teacher and Director functions */
+
 function createEmployee(salary: number | string): Director | Teacher {
     if (salary < 500) {
         return (new Teacher());
@@ -57,11 +59,25 @@ function executeWork(employee: any): string {
     }
 }
 
-
 console.log(createEmployee(200));
 console.log(createEmployee(1000));
 console.log(createEmployee('$500'));
 
 console.log(executeWork(createEmployee(200)));
-
 console.log(executeWork(createEmployee(1000)));
+
+/* ======== END */
+
+/* String literal types */
+type Subjects = 'Math' | 'History'
+
+function teachClass(todayClass: Subjects): string {
+    if (todayClass === 'Math') {
+        return ('Teaching Math')
+    } else if (todayClass === 'History') {
+        return ('Teaching History')
+    }
+}
+
+console.log(teachClass('Math'));
+console.log(teachClass('History'));
