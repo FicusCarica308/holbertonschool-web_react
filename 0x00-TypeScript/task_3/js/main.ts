@@ -1,4 +1,5 @@
 /// <reference path="crud.d.ts" />
+/* Namespace & Declaration merging */
 import {RowElement, RowID} from "./interface"
 import * as CRUD from './crud'
 import { insertRow, updateRow } from "./crud"

@@ -1,4 +1,5 @@
 // Interface & type for main.ts
+/* Namespace & Declaration merging */
 
 type RowID = number;
 
