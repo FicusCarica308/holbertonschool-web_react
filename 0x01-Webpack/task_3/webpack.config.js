@@ -1,3 +1,4 @@
+const { publicDecrypt } = require('crypto');
 const path = require('path');
 
 module.exports = {
@@ -13,6 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public')
   },
   devServer: {
+    static: ['./public'],
     port: 8564,
   },
   module: {
