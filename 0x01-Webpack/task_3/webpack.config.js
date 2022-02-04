@@ -1,4 +1,4 @@
-const { publicDecrypt } = require('crypto');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
