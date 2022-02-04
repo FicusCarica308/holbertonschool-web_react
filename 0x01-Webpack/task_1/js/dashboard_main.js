@@ -16,5 +16,6 @@ function updateCounter() {
   });
 }
 
-const debounced = _.debounce(updateCounter, 1000);
-debounced();
+_.debounce(updateCounter, 1000);
+
+updateCounter();
