@@ -15,17 +15,26 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-          test: /\.s*css$/,
-          use: [
-              "style-loader", // creates style nodes from JS strings
-              "css-loader", // translates CSS into CommonJS
-          ]
+      { 
+        test: /\.css$/, 
+        use: ["style-loader", "css-loader"] 
+      },
+      { 
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
       },
       {
-          test: /\.(jpg|png)$/,
-          loader: 'file-loader'
-      },
-      ]
+      use: [
+        'file-loader',
+        {
+          loader: 'image-webpack-loader',
+          options: {
+            bypassOnDebug: true, // webpack@1.x
+            disable: true, // webpack@2.x and newer
+          },
+        },
+      ],
+    }
+    ]
   },
 };
