@@ -4,18 +4,17 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    all: [
-      './modules/header/header.js',
-      './modules/body/body.js',
-      './modules/footer/footer.js'
-    ]
-  },
+  entry: [
+    './modules/header/header.js',
+    './modules/body/body.js',
+    './modules/footer/footer.js',
+  ],
   performance: {
       maxAssetSize: 5000000
   },
   output: {
     filename: '[name].bundle.js',
+    asyncChunks: true,
     path: path.resolve(__dirname, 'public')
   },
   devServer: {
