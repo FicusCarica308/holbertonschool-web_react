@@ -19,9 +19,13 @@ module.exports = {
         use: ["style-loader", "css-loader"] 
       },
       {
-        test: /\.()$/i, 
-        loader: 'file-loader',
-    }
+        test: /\.()$/i,
+        use: ["file-loader",
+          {
+            loader: "image-webpack-loader",
+          }
+        ]
+      }
     ]
   },
 };
