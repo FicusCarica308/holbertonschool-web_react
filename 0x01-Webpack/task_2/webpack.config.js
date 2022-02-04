@@ -6,8 +6,9 @@ module.exports = {
     main: path.resolve(__dirname, './js/dashboard_main.js'),
   },
   performance: {
-      hints: false
-  },
+      maxAssetSize: 5000000
+  },  
+
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public')
