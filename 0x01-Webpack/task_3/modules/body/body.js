@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const $ = require( "jquery" );
+import './body.css';
 
 $('body').append('<p>Dashboard data for the students</p>');
 $('body').append('<button>Click here to get started</button>')
