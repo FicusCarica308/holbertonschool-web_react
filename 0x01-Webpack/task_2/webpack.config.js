@@ -15,14 +15,17 @@ module.exports = {
   },
   module: {
     rules: [
-      { 
-        test: /\.css$/, 
-        use: ["style-loader", "css-loader"] 
+      {
+          test: /\.s*css$/,
+          use: [
+              "style-loader", // creates style nodes from JS strings
+              "css-loader", // translates CSS into CommonJS
+          ]
       },
-      { 
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource',
-      }
-    ]
+      {
+          test: /\.(jpg|png)$/,
+          loader: 'file-loader'
+      },
+      ]
   },
 };
