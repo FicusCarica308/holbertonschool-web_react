@@ -1,11 +1,5 @@
-var $ = require( "jquery" );
+const $ = require( "jquery" );
 
-function makeParagraph (content) {
-  $("<p>")
-    .html(content)
-    .appendTo('body')
-}
-
-makeParagraph('Holberton Dashboard');
-makeParagraph('Dashboard data for the students');
-makeParagraph('Copyright - Holberton School');
+$('body').append('<p>Holberton Dashboard</p>');
+$('body').append('<p>Dashboard data for the students</p>');
+$('body').append('<p>Copyright - Holberton School</p>');
