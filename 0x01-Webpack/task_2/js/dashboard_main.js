@@ -1,7 +1,6 @@
 const $ = require( "jquery" );
 const _ = require('lodash');
 const css = require('../css/main.css');
-const img = require('../assets/holberton-logo.jpg')
 
 $('body').append('<div id=logo></div>');
 $('body').append('<p>Holberton Dashboard</p>');
