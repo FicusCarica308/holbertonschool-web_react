@@ -11,7 +11,7 @@ module.exports = {
       maxAssetSize: 5000000
   },  
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public')
   },
   devServer: {
