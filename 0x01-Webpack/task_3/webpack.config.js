@@ -5,7 +5,9 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    all: path.resolve(__dirname, './modules/header/header.js'),
+    header: './modules/header/header.js',
+    body: './modules/body/body.js',
+    footer: './modules/footer/footer.js',
   },
   performance: {
       maxAssetSize: 5000000
