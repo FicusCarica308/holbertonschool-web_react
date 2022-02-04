@@ -1,4 +1,4 @@
-import $ from "jquery";
+var $ = require( "jquery" );
 
 function makeParagraph (content) {
   $("<p>")
