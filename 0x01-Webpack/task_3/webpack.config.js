@@ -4,11 +4,13 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: [
-    './modules/header/header.js',
-    './modules/body/body.js',
-    './modules/footer/footer.js',
-  ],
+  entry: {
+    all: [
+      './modules/header/header.js',
+      './modules/body/body.js',
+      './modules/footer/footer.js'
+    ]
+  },
   performance: {
       maxAssetSize: 5000000
   },
