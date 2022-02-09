@@ -23,7 +23,7 @@ p, h1 {
 .App-body {
   display: flex;
   justify-content: space-between;
-  height: 67vh;
+  height: 60vh;
 }
 
 .App-body p {
