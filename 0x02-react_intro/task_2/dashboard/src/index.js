@@ -6,7 +6,6 @@ import Notifications from './Notifications'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  
   <React.StrictMode>
     <root-notifications>
       <Notifications />

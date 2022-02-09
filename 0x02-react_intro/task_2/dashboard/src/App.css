@@ -21,15 +21,24 @@ p, h1 {
 
 /* body CSS */
 .App-body {
-  display: flex;
-  justify-content: space-between;
   height: 60vh;
 }
 
 .App-body p {
-  margin: 40px 40px;
+  margin: 40px 0px 15px 40px;
 }
 
+.login-form {
+  margin: 0px 40px;
+}
+
+.login-form label {
+  margin-right: 10px
+}
+
+.login-form #password-label {
+  margin-left: 10px;
+}
 
 /* footer CSS */
 .App-footer {
