@@ -6,11 +6,12 @@ import Notifications from './Notifications'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+  
   <React.StrictMode>
-    <App />
     <root-notifications>
       <Notifications />
     </root-notifications>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
