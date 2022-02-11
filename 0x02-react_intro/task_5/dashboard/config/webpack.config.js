@@ -27,6 +27,12 @@ module.exports = {
             loader: "image-webpack-loader",
           }
         ]
+      },
+      {
+        loader: "babel-loader",
+        options: {
+          rootMode: "upward",
+        },
       }
     ]
   },
