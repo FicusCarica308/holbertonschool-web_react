@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './App/App.css';
-import App from './App/App';
-import Notifications from './Notifications/Notifications'
+import './App.css';
+import App from './App';
+import Notifications from './Notifications'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
