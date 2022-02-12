@@ -8,8 +8,8 @@ beforeEach(() => {
 
 
 describe('App HTML', () => {
-  it("checks if any nodes exists in the wrapper (If the first div is rendered properly)", () => {
-    expect(wrapper.exists()).toBeTruthy();
+  it("checks if the first div is rendered properly without error", () => {
+    expect(wrapper.exists('.App')).toBeTruthy()
   });
 
   it("renders App-header properly", () => {
