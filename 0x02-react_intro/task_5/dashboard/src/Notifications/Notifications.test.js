@@ -1,34 +1,22 @@
-import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import { shallow } from 'enzyme';
 import Notifications from './Notifications'
+import React from 'react';
 
-let container = null;
+let wrapper = null;
 beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-  render(<Notifications />, container);
+  wrapper = shallow(<Notifications />);
 });
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
-describe('App HTML', () => {
-  it("renders Notifications without error", () => {
-    expect(container).not.toBe('undefined');
+describe('Notification HTML', () => {
+  it("checks if the first div is rendered properly without error", () => {
+    expect(wrapper.exists('.Notifications')).toBeTruthy()
   });
 
   it("renders three list elements properly", () => {
-    const list = container.querySelector('.notification-list')
-    expect(list.children.length).toBe(3);
+    expect(wrapper.find('ul').children().length).toBe(3);
   });
 
   it("renders correct text", () => {
-    const paragraph = container.querySelector('.Notifications').querySelector('p');
-    expect(paragraph.textContent).toBe('Here is the list of notifications');
+    expect(wrapper.find('p').text()).toBe('Here is the list of notifications');
   });
 });

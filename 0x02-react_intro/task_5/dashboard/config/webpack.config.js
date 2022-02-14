@@ -1,20 +1,19 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    main: path.resolve(__dirname, '../src/App/App.js'),
-  },
-  performance: {
-    maxAssetSize: 5000000
-  },
+  devtool: 'inline-source-map',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './dist')
   },
+  performance: {
+    maxAssetSize: 5000000
+  },
   devServer: {
     hot: true,
+    static: path.resolve('./dist'),
   },
   module: {
     rules: [
@@ -23,10 +22,14 @@ module.exports = {
         use: ["style-loader", "css-loader"] 
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i, 
+        test: /\.(jpe?g|png)$/i, 
         use: ["file-loader",
           {
             loader: "image-webpack-loader",
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
+            },
           }
         ]
       },
@@ -39,8 +42,4 @@ module.exports = {
       }
     ]
   },
-  devtool: 'inline-source-map',
-  plugins: [
-    new HtmlWebpackPlugin()
-  ],
 };

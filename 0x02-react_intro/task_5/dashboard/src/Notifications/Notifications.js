@@ -1,8 +1,8 @@
 /* Notifications element for App.js... */
-import closeIcon from '../assets/close-icon.png';
 import React from 'react';
+import closeIcon from '../assets/close-icon.png';
 import './Notifications.css'
-import {getLatestNotification} from '../utils/utils.js';
+import { getLatestNotification } from '../utils/utils.js';
 
 export default function Notifications() {
   return (
