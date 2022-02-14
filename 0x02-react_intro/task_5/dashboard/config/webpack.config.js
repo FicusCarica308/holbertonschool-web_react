@@ -14,6 +14,7 @@ module.exports = {
   devServer: {
     hot: true,
     static: path.resolve('./dist'),
+    port: 7340
   },
   module: {
     rules: [
