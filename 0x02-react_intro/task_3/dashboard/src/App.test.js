@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import App from './App';
+import React from 'react';
 
 let wrapper = null;
 beforeEach(() => {

@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import Notifications from './Notifications'
+import React from 'react';
 
 let wrapper = null;
 beforeEach(() => {
