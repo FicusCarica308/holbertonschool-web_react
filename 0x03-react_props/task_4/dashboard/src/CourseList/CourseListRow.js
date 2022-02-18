@@ -2,11 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
-  const fragment = <React.Fragment><th>{ textFirstCell }</th><th>{ textSecondCell }</th></React.Fragment>
   return(
     <tr>
-      {isHeader === true ? {fragment}
-      : <h1>junk</h1>}
+      {isHeader === true ? (
+        textSecondCell === null ? (
+          <th colSpan={2} >{textFirstCell}</th>
+        ) : (
+          <React.Fragment>
+            <th>{ textFirstCell }</th>
+            <th>{ textSecondCell }</th>
+          </React.Fragment>
+        )
+      ) : (
+        <React.Fragment>
+          <td>{ textFirstCell }</td>
+          <td>{ textSecondCell }</td>
+        </React.Fragment>
+      )}
     </tr>
   );
 }
