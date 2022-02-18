@@ -4,27 +4,39 @@ import Notifications from '../Notifications/Notifications'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import Login from '../Login/Login'
-import CourseListRow from '../CourseList/CourseListRow'
+import CourseList from '../CourseList/CourseList'
+import PropTypes from 'prop-types';
 
-function App() {
+function App({isLoggedIn}) {
   return (
     <React.Fragment>
-
-      <CourseListRow />
-
       <root-notifications>
         <Notifications />
       </root-notifications>
       <div className="App">
         <Header />
         <div className='App-body'>
-          <p>Login to access the full dashboard</p>
-          <Login />
+          {isLoggedIn === false ? (
+            <React.Fragment>
+              <p>Login to access the full dashboard</p>
+              <Login />
+            </React.Fragment>
+          ) : (
+            <CourseList />
+          )}
         </div>
         <Footer />
       </div>
     </React.Fragment>
   );
 }
+
+App.propTypes = {
+  isLoggedIn: PropTypes.bool
+};
+
+App.defaultProps = {
+  isLoggedIn: false
+};
 
 export default App;
