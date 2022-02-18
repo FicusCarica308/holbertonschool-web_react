@@ -5,14 +5,9 @@ p, h1 {
 
 /* body CSS */
 .App-body {
-  height: 50vh;
+  height: 60vh;
 }
 
 .App-body p {
   margin: 40px 0px 15px 40px;
-}
-
-/* media querys */
-@media screen {
-  
 }

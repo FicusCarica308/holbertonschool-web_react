@@ -10,10 +10,10 @@ import PropTypes from 'prop-types';
 function App({isLoggedIn}) {
   return (
     <React.Fragment>
+      <div className="App">
       <root-notifications>
         <Notifications />
       </root-notifications>
-      <div className="App">
         <Header />
         <div className='App-body'>
           {isLoggedIn === false ? (
