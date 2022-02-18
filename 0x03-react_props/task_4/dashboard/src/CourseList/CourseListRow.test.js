@@ -4,7 +4,7 @@ import CourseListRow from './CourseListRow'
 
 let wrapper = null;
 
-describe('{isHeader, textFirstCell, textSecondCell} Component', () => {
+describe('CourseListRow({isHeader, textFirstCell, textSecondCell}) Component', () => {
   it('should render one cell with colspan = 2 when textSecondCell does not exist', () => {
     wrapper = shallow(<CourseListRow isHeader={true} textFirstCell='test'/>);
     expect(wrapper.containsMatchingElement(<th colSpan={2} >test</th>)).toBe(true);
