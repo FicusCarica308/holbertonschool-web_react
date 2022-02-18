@@ -12,7 +12,7 @@ export default function Notifications() {
       <ul className='notification-list'>
         <NotificationItem type='default' value='New course available' />
         <NotificationItem type='urgent' value='New resume available' />
-        <NotificationItem type='urgent' html={ getLatestNotification() } />
+        <NotificationItem type='urgent' html={ {__html: getLatestNotification()} } />
       </ul>
       <button
           aria-label="Close"
