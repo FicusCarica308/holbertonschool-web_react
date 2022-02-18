@@ -4,12 +4,10 @@ import React from 'react';
 import NotificationItem from './NotificationItem';
 
 let wrapper = null;
-beforeEach(() => {
-  wrapper = shallow(<Notifications />);
-});
 
 describe('Notification HTML', () => {
   it("checks if the first div is rendered properly without error", () => {
+    wrapper = shallow(<Notifications displayDrawer={true}/>);
     expect(wrapper.exists('.Notifications')).toBeTruthy()
   });
 
@@ -24,9 +22,26 @@ describe('Notification HTML', () => {
   it("renders correct text for p tag", () => {
     expect(wrapper.find('p').text()).toBe('Here is the list of notifications');
   });
+
+  /* === */
+
+  it("menu item is being displayed when displayDrawer is false", () => {
+    wrapper = shallow(<Notifications displayDrawer={true}/>)
+    expect(wrapper.find('.menuItem').length).toBe(1);
+  });
+
+  it("div.Notifications is not being displayed when displayDrawer is false", () => {
+    wrapper = shallow(<Notifications displayDrawer={false}/>)
+    expect(wrapper.find('.Notifications').length).toBe(0);
+  });
+
+  it("menu item is being displayed when displayDrawer is true", () => {
+    wrapper = shallow(<Notifications displayDrawer={true}/>)
+    expect(wrapper.find('.menuItem').length).toBe(1);
+  });
+
+  it("div.Notifications is being displayed when displayDrawer is true", () => {
+    wrapper = shallow(<Notifications displayDrawer={true}/>)
+    expect(wrapper.find('.Notifications').length).toBe(1);
+  });
 });
-
-
-/* Instead of testing if the component renders li, check that the component renders NotificationItem elements
-Add a test to verify that the first NotificationItem element renders the right html (note: this is usually not the best way to write tests, but sometimes necessary when you don’t control the child component)
-*/
