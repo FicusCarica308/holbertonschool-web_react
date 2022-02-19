@@ -12,20 +12,26 @@ function CourseList({listCourses}) {
         <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true}/>
       </thead>
       <tbody>
-        <CourseListRow textFirstCell="ES6" textSecondCell="60" isHeader={false}/>
-        <CourseListRow textFirstCell="Webpack" textSecondCell="20" isHeader={false}/>
-        <CourseListRow textFirstCell="React" textSecondCell="40" isHeader={false}/>
+        { listCourses.length === 0 ? (
+          <CourseListRow textFirstCell="No course available yet" isHeader={false}/>
+        ) : (
+          <React.Fragment>
+            {listCourses.map((row) =>
+            <CourseListRow key={row.id} textFirstCell={row.name} textSecondCell={row.credit}/>
+            )}
+          </React.Fragment>
+        )}
       </tbody>
     </table>
   );
 }
 
-CourseList.protoTypes = {
-  listCourses: PropTypes.arrayOf(CourseShape),
-}
-
-CourseList.default = {
+CourseList.defaultProps = {
   listCourses: [],
 }
 
+
+CourseList.protoTypes = {
+  listCourses: PropTypes.arrayOf(CourseShape),
+}
 export default CourseList;

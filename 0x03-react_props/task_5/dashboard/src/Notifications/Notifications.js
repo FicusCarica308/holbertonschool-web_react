@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import closeIcon from '../assets/close-icon.png';
 import './Notifications.css'
-import { getLatestNotification } from '../utils/utils.js';
 import NotificationItem from './NotificationItem';
+import NotificationItemShape from './NotificationItemShape'
 
-function Notifications({displayDrawer}) {
+function Notifications({displayDrawer, listNotifications}) {
   return (
     <React.Fragment>
       <div className='menuItem'>
@@ -14,11 +14,21 @@ function Notifications({displayDrawer}) {
       </div>
       {displayDrawer ? (
           <div className='Notifications' display={displayDrawer}>
-            <p>Here is the list of notifications</p>
             <ul className='notification-list'>
-              <NotificationItem type='default' value='New course available' />
-              <NotificationItem type='urgent' value='New resume available' />
-              <NotificationItem type='urgent' html={ {__html: getLatestNotification()} } />
+              { listNotifications.length === 0 ? (
+                  <NotificationItem type='default' value='No new notifications for now' />
+                ) : (
+                  <React.Fragment>
+                    <p>Here is the list of notifications</p>
+                    {listNotifications.map((notification) =>
+                      <NotificationItem key={notification.id}
+                                        html={notification.html}
+                                        type={notification.type}
+                                        value={notification.value}
+                      />
+                    )}
+                  </React.Fragment>
+                )}
             </ul>
             <button
                 aria-label="Close"
@@ -47,11 +57,13 @@ function Notifications({displayDrawer}) {
 }
 
 Notifications.propTypes = {
-  displayDrawer: PropTypes.bool
+  displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape)
 }
 
 Notifications.defaultProps = {
-  displayDrawer: false
+  displayDrawer: false,
+  listNotifications: []
 }
 
 export default Notifications;
