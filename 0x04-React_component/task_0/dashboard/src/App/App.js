@@ -26,7 +26,7 @@ class App extends React.Component {
       <React.Fragment>
         <div className="App">
         <root-notifications>
-          <Notifications listNotifications={[]}/>
+          <Notifications listNotifications={listNotifications}/>
         </root-notifications>
           <Header />
           <div className='App-body'>
