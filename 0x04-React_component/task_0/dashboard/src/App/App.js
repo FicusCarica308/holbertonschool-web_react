@@ -1,4 +1,4 @@
-import {React, Component} from 'react';
+import React from 'react';
 import './App.css';
 import Notifications from '../Notifications/Notifications'
 import { getLatestNotification } from '../utils/utils.js';
@@ -20,11 +20,7 @@ const listNotifications = [
   {id: 3, type: 'urgent', html: {__html: getLatestNotification()}}
 ]
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+class App extends React.Component {
   render() {
     return(
       <React.Fragment>
