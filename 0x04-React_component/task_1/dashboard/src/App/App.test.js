@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { shallow, render } from 'enzyme';
 import App from './App';
 import Footer from '../Footer/Footer';
@@ -8,6 +11,10 @@ import CourseList from '../CourseList/CourseList'
 import React from 'react';
 
 let wrapper = null;
+
+jest.mock('react-dom', () => ({
+  render: jest.fn(),
+}));
 
 describe('App HTML', () => {
   it("Checks if App is rendered properly without error", () => {
