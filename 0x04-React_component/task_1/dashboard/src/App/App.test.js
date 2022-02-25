@@ -1,22 +1,17 @@
 /**
  * @jest-environment jsdom
  */
-import { shallow, render } from 'enzyme';
+import { shallow, render, mount } from 'enzyme';
 import App from './App';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Header from '../Header/Header';
 import Notifications from '../Notifications/Notifications';
-import CourseList from '../CourseList/CourseList'
 import React from 'react';
 
 let wrapper = null;
 
-jest.mock('react-dom', () => ({
-  render: jest.fn(),
-}));
-
-describe('App HTML', () => {
+describe('Checks if App component is rendered correctly', () => {
   it("Checks if App is rendered properly without error", () => {
     wrapper = shallow(<App/>);
     expect(wrapper.exists('.App')).toBeTruthy()
@@ -48,7 +43,7 @@ describe('App HTML', () => {
   });
 });
 
-describe('App HTML (isLoggedIn = true)', () => {
+describe('Checks if App componenet is rendered correctly when (isLoggedIn = true)', () => {
   it("should not display Login", () => {
     wrapper = shallow(<App isLoggedIn={true}/>)
     expect(wrapper.find('.App-body').render().find('.login-form').length).toBe(0);
@@ -59,3 +54,5 @@ describe('App HTML (isLoggedIn = true)', () => {
     expect(wrapper.find('.App-body').render().find('#CourseList').length).toBe(1);
   });
 });
+
+//Create a test to verify that when the keys control and h are pressed the logOut function, passed as a prop, is called and the alert function is called with the string Logging you out
