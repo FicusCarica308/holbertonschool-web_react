@@ -6,7 +6,7 @@ function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
     <tr>
       {isHeader === true ? (
         textSecondCell === null ? (
-          <th colSpan={2} >{textFirstCell}</th>
+          <th colSpan={2} style={{backgroundColor: '#deb5b545'}}>{textFirstCell}</th>
         ) : (
           <React.Fragment>
             <th>{ textFirstCell }</th>
@@ -15,7 +15,7 @@ function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
         )
       ) : (
         <React.Fragment>
-          <td>{ textFirstCell }</td>
+          <td style={{backgroundColor: '#f5f5f5ab'}}>{ textFirstCell }</td>
           <td>{ textSecondCell }</td>
         </React.Fragment>
       )}
