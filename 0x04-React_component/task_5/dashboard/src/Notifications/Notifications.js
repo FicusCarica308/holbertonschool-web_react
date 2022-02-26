@@ -6,7 +6,7 @@ import './Notifications.css'
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape'
 
-class Notifications extends React.PureComponent {
+class Notifications extends React.Component {
   constructor (props) {
     super(props);
     this.markAsRead = this.markAsRead.bind(this);
