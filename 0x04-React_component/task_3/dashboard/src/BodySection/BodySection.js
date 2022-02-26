@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
+// Props {title: string, children: htmlTag}
 class BodySection extends React.Component {
   render () {
     return (
@@ -17,10 +17,12 @@ class BodySection extends React.Component {
 
 BodySection.defaultProps = {
   title: "default",
+  children: <></>,
 };
 
 BodySection.propTypes = {
   title: PropTypes.string,
+  children: PropTypes.any,
 };
 
 export default BodySection;

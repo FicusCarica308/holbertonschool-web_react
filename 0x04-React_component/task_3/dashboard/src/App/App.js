@@ -1,13 +1,14 @@
 import React from 'react';
-import './App.css';
+import PropTypes from 'prop-types';
 import Notifications from '../Notifications/Notifications'
-import { getLatestNotification } from '../utils/utils.js';
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import Login from '../Login/Login'
 import CourseList from '../CourseList/CourseList'
-import BodySection from '../BodySection/BodySection'
-import PropTypes from 'prop-types';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom'
+import BodySection from '../BodySection/BodySection';
+import { getLatestNotification } from '../utils/utils.js';
+import './App.css';
 
 const listCourses = [
   {id: 1, name:"ES6", credit: 60},
@@ -43,7 +44,7 @@ class App extends React.Component {
 
   render() {
     return(
-      <React.Fragment>
+      <>
         <div className="App">
         <root-notifications>
           <Notifications listNotifications={listNotifications}/>
@@ -51,17 +52,23 @@ class App extends React.Component {
           <Header />
           <div className='App-body'>
             {this.props.isLoggedIn === false ? (
-              <React.Fragment>
-                <p>Login to access the full dashboard</p>
-                <Login />
-              </React.Fragment>
+              <>
+                <BodySectionWithMarginBottom title='Log in to continue'>
+                  <Login />
+                </BodySectionWithMarginBottom>
+              </>
             ) : (
-              <CourseList listCourses={listCourses}/>
+              <BodySectionWithMarginBottom title='Course List'>
+                <CourseList listCourses={listCourses}/>
+              </BodySectionWithMarginBottom>
             )}
+            <BodySection title='News from the school'>
+              <p>Random Text</p>
+            </BodySection>
           </div>
           <Footer />
         </div>
-      </React.Fragment>
+        </>
     );
   }
 }
