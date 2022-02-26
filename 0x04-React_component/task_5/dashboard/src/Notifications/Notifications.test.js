@@ -7,13 +7,13 @@ import React from 'react';
 import NotificationItem from './NotificationItem';
 
 let wrapper = null;
+const listNotifications = [
+  {id: 1, type: 'default', value: 'New course available'},
+  {id: 2, type: 'urgent',  value: 'New resume available'},
+  {id: 3, type: 'urgent', html: {__html: '<span>TEST</span'}}
+]
 
 describe('Notification HTML with listNotifications={listNotifications}', () => {
-  const listNotifications = [
-    {id: 1, type: 'default', value: 'New course available'},
-    {id: 2, type: 'urgent',  value: 'New resume available'},
-    {id: 3, type: 'urgent', html: {__html: '<span>TEST</span'}}
-  ]
   beforeEach(() => {
     wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>);
    });
@@ -95,4 +95,41 @@ describe('Notification Component markAsRead function tests', () => {
     notificationInstance.markAsRead(3);
     expect(logSpy).toHaveBeenCalledWith('Notification $3 has been marked as read');
   });
+
+  describe('Tests Notification Component selective rendering feature', () => {
+  
+    let componentUpdateSpy = null;
+  
+    beforeEach(() => {
+      componentUpdateSpy = jest.spyOn(
+        Notifications.prototype,
+        "shouldComponentUpdate"
+      );
+      wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>)
+    })
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    })
+
+    it('doesnt rerender on same listNotifications', () => {
+      let testShorterList = [
+        {id: 1, type: 'default', value: 'New course available'},
+        {id: 2, type: 'urgent',  value: 'New resume available'},
+      ]
+      wrapper.setProps({ listNotifications: testShorterList });
+      expect(componentUpdateSpy).toHaveLastReturnedWith(false);
+    });
+
+    it('rerenders with longer listNotifications prop', () => {
+      let testLongerList = [
+        {id: 1, type: 'default', value: 'New course available'},
+        {id: 2, type: 'urgent',  value: 'New resume available'},
+        {id: 3, type: 'default', value: 'New course available'},
+        {id: 4, type: 'default', value: 'New course available'},
+      ]
+      wrapper.setProps({ listNotifications: testLongerList });
+      expect(componentUpdateSpy).toHaveLastReturnedWith(true);
+    });
+  })
 });
