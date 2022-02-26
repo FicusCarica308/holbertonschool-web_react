@@ -22,7 +22,7 @@ afterEach(() => {
 
 describe('Tests for WithLogging HOC componenet', () => {
   it('should call console.log if wrappedComponent is pure html', () => {
-    const TestHOC = WithLogging(<p/>);
+    const TestHOC = WithLogging(() => <p/>);
     wrapper = shallow(<TestHOC />);
     expect(consoleMock).toHaveBeenCalledTimes(1);
     wrapper.unmount();
