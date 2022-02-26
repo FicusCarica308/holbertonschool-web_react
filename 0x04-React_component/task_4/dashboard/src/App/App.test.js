@@ -54,5 +54,3 @@ describe('Checks if App componenet is rendered correctly when (isLoggedIn = true
     expect(wrapper.find('.App-body').render().find('#CourseList').length).toBe(1);
   });
 });
-
-//Create a test to verify that when the keys control and h are pressed the logOut function, passed as a prop, is called and the alert function is called with the string Logging you out
