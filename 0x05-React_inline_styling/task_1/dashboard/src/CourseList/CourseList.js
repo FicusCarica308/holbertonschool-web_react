@@ -7,18 +7,23 @@ import './CourseList.css'
 
 
 const styles = StyleSheet.create({
-  courseListStyle: {
+  courseList: {
     width: '85%',
     border: '0.5px solid',
     borderCollapse: 'collapse',
     margin: 'auto',
     marginTop: '30px',
+  },
+  table: {
+  },
+  thead: {
   }
+
 });
 
 function CourseList({listCourses}) {
   return(
-    <table id='CourseList' className={css(styles.courseListStyle)}>
+    <table id='CourseList' className={css(styles.courseList)}>
       <thead>
         <CourseListRow textFirstCell="Available courses" isHeader={true}/>
         <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true}/>
