@@ -22,7 +22,7 @@ const listNotifications = [
   {id: 3, type: 'urgent', html: {__html: getLatestNotification()}}
 ]
 
-const styles = StyleSheet.create({\
+const styles = StyleSheet.create({
   App: {
   },
   footer: {
