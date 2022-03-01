@@ -2,21 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
+  const rowBgColor = { backgroundColor: '#deb5b545' }
+  const headBgColor = {backgroundColor: '#f5f5f5ab'}
   return(
     <tr>
       {isHeader === true ? (
         textSecondCell === null ? (
-          <th colSpan={2} style={{backgroundColor: '#deb5b545'}}>{textFirstCell}</th>
+          <th colSpan={2} style={headBgColor}>{textFirstCell}</th>
         ) : (
           <React.Fragment>
-            <th>{ textFirstCell }</th>
-            <th>{ textSecondCell }</th>
+            <th style={headBgColor}>{ textFirstCell }</th>
+            <th style={headBgColor}>{ textSecondCell }</th>
           </React.Fragment>
         )
       ) : (
         <React.Fragment>
-          <td style={{backgroundColor: '#f5f5f5ab'}}>{ textFirstCell }</td>
-          <td>{ textSecondCell }</td>
+          <td style={rowBgColor}>{ textFirstCell }</td>
+          <td style={rowBgColor}>{ textSecondCell }</td>
         </React.Fragment>
       )}
     </tr>
