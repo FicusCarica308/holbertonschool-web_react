@@ -23,7 +23,7 @@ const listNotifications = [
 ]
 
 const styles = StyleSheet.create({
-  bodyStyle: {
+  body: {
       height: '60vh'
   }
 });
@@ -58,7 +58,7 @@ class App extends React.Component {
           <Notifications listNotifications={listNotifications}/>
         </root-notifications>
           <Header />
-          <div className={'App-body ' + css(styles.bodyStyle)}>
+          <div className={'App-body ' + css(styles.body)}>
             {this.props.isLoggedIn === false ? (
               <>
                 <BodySectionWithMarginBottom title='Log in to continue'>
