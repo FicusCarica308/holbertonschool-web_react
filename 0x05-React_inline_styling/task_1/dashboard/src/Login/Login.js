@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
   },
   loginPassword: {
     marginLeft: '10px'
+  },
+  margin: {
+  },
+  label: {
   }
 });
 
