@@ -8,14 +8,14 @@ import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape'
 
 const styles = StyleSheet.create({
-  notifyStyle: {
+  Notifications: {
     border: 'dashed 2px red',
     padding: '2px',
     paddingLeft: '40px',
     maxWidth: '20vw',
     position: 'relative'
   },
-  menuItemStyle: {
+  menuItem: {
     marginLeft: '16vw',
     paddingBottom: '10px',
   }
@@ -39,11 +39,11 @@ class Notifications extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <div className={'menuItem ' + css(styles.menuItemStyle)}>
+        <div className={'menuItem ' + css(styles.menuItem)}>
           Your Notifications
         </div>
         {this.props.displayDrawer ? (
-            <div className={'Notifications ' + css(styles.notifyStyle)} display={this.props.displayDrawer}>
+            <div className={'Notifications ' + css(styles.Notifications)} display={this.props.displayDrawer}>
               <ul className='notification-list'>
                 { this.props.listNotifications.length === 0 ? (
                     <NotificationItem type='default' value='No new notifications for now' />
