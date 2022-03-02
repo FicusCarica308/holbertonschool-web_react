@@ -1,4 +1,5 @@
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
 import NotificationItem from './NotificationItem.js';
 import React from 'react';
 import Notifications from './Notifications'
@@ -7,6 +8,14 @@ let wrapper = null;
 
 
 describe('NotificationItem component tests', () => {
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+  
   it("Checks if the NotificationItem is rendered properly without error", () => {
     wrapper = shallow(<NotificationItem type='default'/>);
     expect(wrapper.exists(<NotificationItem type='default'/>));
@@ -26,8 +35,12 @@ describe('NotificationItem component tests', () => {
 });
 
 describe('NotificationItem component tests for markAsRead', () => {
-  // create a test, that will pass a spy as the markAsRead property
-//Check that when simulating a click on the component, the spy is called with the right ID argument
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
   it('should display the message from markAsRead with the elements corrisponding id', () => {
     const markAsReadSpy = jest.fn();
     const wrapper = shallow(<Notifications/>);

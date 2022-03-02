@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
 import CourseList from './CourseList'
 import CourseListRow from './CourseListRow'
 
 let wrapper = null;
 
-
-
 describe('CourseList Component tests with listCourses={[]}', () => {
   beforeEach(() => {
     wrapper = shallow(<CourseList listCourses={[]}/>);
+    StyleSheetTestUtils.suppressStyleInjection();
    });
   it("Checks if the CourseList component is rendered properly without error", () => {
     expect(wrapper.exists('#CourseList')).toBeTruthy()
@@ -20,14 +20,21 @@ describe('CourseList Component tests with listCourses={[]}', () => {
   it('Should render "No course available yet" <CourseListRow>', () => {
     expect(wrapper.find(CourseListRow).at(2).render().text()).toBe("No course available yet");
   });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
 });
 
 describe('CourseList Component test with nothing passed', () => {
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<CourseList/>);
    });
   it('Should render "No course available yet" <CourseListRow>', () => {
     expect(wrapper.find(CourseListRow).at(2).render().text()).toBe("No course available yet");
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 });
 
@@ -39,6 +46,7 @@ describe('CourseList Component tests with listCourses={[CONTENT]}', () => {
     {id: 3, name:"React", credit: 40}
   ]
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<CourseList listCourses={listCourses}/>);
    });
   it("Checks if the CourseList component is rendered properly without error", () => {
@@ -51,6 +59,9 @@ describe('CourseList Component tests with listCourses={[CONTENT]}', () => {
     expect(wrapper.find(CourseListRow).at(2).render().text()).toBe("ES660")
     expect(wrapper.find(CourseListRow).at(3).render().text()).toBe("Webpack20")
     expect(wrapper.find(CourseListRow).at(4).render().text()).toBe("React40")
+  });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 });
 

@@ -1,10 +1,16 @@
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
 import App from './Login';
 import React from 'react';
 
 let wrapper = null;
 beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
   wrapper = shallow(<App />);
+});
+
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 });
 
 

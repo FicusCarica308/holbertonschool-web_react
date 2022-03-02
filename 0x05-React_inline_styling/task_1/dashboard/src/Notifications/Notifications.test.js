@@ -1,9 +1,10 @@
 /**
  * @jest-environment jsdom
  */
+ import React from 'react';
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
 import Notifications from './Notifications'
-import React from 'react';
 import NotificationItem from './NotificationItem';
 
 let wrapper = null;
@@ -15,6 +16,7 @@ const listNotifications = [
 
 describe('Notification HTML with listNotifications={listNotifications}', () => {
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>);
    });
   it("checks if the first div is rendered properly without error", () => {
@@ -32,11 +34,15 @@ describe('Notification HTML with listNotifications={listNotifications}', () => {
   it("renders correct text for p tag", () => {
     expect(wrapper.find('p').text()).toBe('Here is the list of notifications');
   });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 });
 
 describe('Notification HTML with listNotifications={[]}', () => {
   beforeEach(() => {
     wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]}/>);
+    StyleSheetTestUtils.suppressStyleInjection();
    });
   it("checks if the first div is rendered properly without error", () => {
     expect(wrapper.exists('.Notifications')).toBeTruthy()
@@ -53,19 +59,32 @@ describe('Notification HTML with listNotifications={[]}', () => {
   it("Does not display 'Here is the list of notifications' ", () => {
     expect(wrapper.find('p').length).toBe(0);
   });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 });
 
 describe('Notification HTML with no listNotifications passed', () => {
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<Notifications displayDrawer={true} />);
    });
    it("Does not display 'Here is the list of notifications' ", () => {
     expect(wrapper.find(NotificationItem).first().prop('value')).toBe('No new notifications for now');
     expect(wrapper.find('p').length).toBe(0);
   });
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 });
 
 describe('Notification HTML displayDrawer tests', () => {
+  beforeEach(() => {
+      StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
   it("menu item is being displayed when displayDrawer is false", () => {
     wrapper = shallow(<Notifications displayDrawer={true}/>)
     expect(wrapper.find('.menuItem').length).toBe(1);
@@ -88,6 +107,12 @@ describe('Notification HTML displayDrawer tests', () => {
 });
 
 describe('Notification Component markAsRead function tests', () => {
+  beforeEach(() => {
+      StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
   it('Tests if markAsRead can be called from an instance of Notifications with the correct message', () => {
     const logSpy = jest.spyOn(console, 'log');
     const notificationInstance = new Notifications;
@@ -101,6 +126,7 @@ describe('Notification Component markAsRead function tests', () => {
     let componentUpdateSpy = null;
   
     beforeEach(() => {
+      StyleSheetTestUtils.suppressStyleInjection();
       componentUpdateSpy = jest.spyOn(
         Notifications.prototype,
         "shouldComponentUpdate"
@@ -110,6 +136,7 @@ describe('Notification Component markAsRead function tests', () => {
 
     afterEach(() => {
       jest.restoreAllMocks();
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
     })
 
     it('doesnt rerender on same listNotifications', () => {

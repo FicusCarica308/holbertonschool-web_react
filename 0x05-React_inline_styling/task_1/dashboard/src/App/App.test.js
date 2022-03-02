@@ -2,6 +2,7 @@
  * @jest-environment jsdom
  */
 import { shallow, render, mount } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
 import App from './App';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -12,6 +13,12 @@ import React from 'react';
 let wrapper = null;
 
 describe('Checks if App component is rendered correctly', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
   it("Checks if App is rendered properly without error", () => {
     wrapper = shallow(<App/>);
     expect(wrapper.exists('.App')).toBeTruthy()
@@ -44,6 +51,12 @@ describe('Checks if App component is rendered correctly', () => {
 });
 
 describe('Checks if App componenet is rendered correctly when (isLoggedIn = true)', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+  afterEach(() => {
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
   it("should not display Login", () => {
     wrapper = shallow(<App isLoggedIn={true}/>)
     expect(wrapper.find('.App-body').render().find('.login-form').length).toBe(0);
