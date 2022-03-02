@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   App: {
   },
   footer: {
-
   },
   body: {
       height: '60vh'
@@ -37,8 +36,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  
 
   logoutHandler(event) {
     if (event.ctrlKey && event.key == 'h') {

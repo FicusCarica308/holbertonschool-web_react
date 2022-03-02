@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
   table: {
   },
   thead: {
+    tr: {
+    }
   }
 
 });
