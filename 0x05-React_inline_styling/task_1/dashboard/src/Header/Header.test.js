@@ -1,29 +1,30 @@
-import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import Header from './Header';
 import { StyleSheetTestUtils } from 'aphrodite';
+import App from './Header';
+import React from 'react';
 
-StyleSheetTestUtils.suppressStyleInjection();
+let wrapper = null;
 
-describe("Testing the <Header /> Component", () => {
-	
-	let wrapper;
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+  wrapper = shallow(<App />);
+});
 
-	beforeEach(() => {
-		wrapper = shallow(<Header shouldRender />);
-	});
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
-	it("<Header /> is rendered without crashing", () => {
-		expect(wrapper).to.not.be.an('undefined');
-    });
-    
-    it("the <Header /> component render img", () => {
-		expect(wrapper.find('img')).to.have.lengthOf(1);
-    });
-    
-    it("the <Header /> component render h1", () => {
-		expect(wrapper.find('h1')).to.have.lengthOf(1);
-	});
 
+describe('Header Prop', () => {
+  it("Checks if the Header component is rendered properly without error", () => {
+    expect(wrapper.exists('.App-header')).toBeTruthy()
+  });
+
+  it("Renders img tag properly", () => {
+    expect(wrapper.exists('.App-header img')).toBeTruthy()
+  });
+
+  it("renders h1 tag properly", () => {
+    expect(wrapper.exists('.App-header h1')).toBeTruthy()
+  });
 });

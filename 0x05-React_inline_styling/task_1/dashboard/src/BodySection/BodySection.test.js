@@ -1,28 +1,22 @@
 import React from 'react';
-import { expect } from 'chai';
-import Adapter from 'enzyme-adapter-react-16';
-import { shallow, configure, mount, } from 'enzyme';
-import BodySection from './BodySection.js';
-import { StyleSheetTestUtils } from 'aphrodite';
+import BodySection from './BodySection'
+import { shallow } from 'enzyme';
 
-configure({
-	adapter: new Adapter()
-});
+let wrapper = null;
 
-StyleSheetTestUtils.suppressStyleInjection();
-
-describe("Testing the BodySection", () => {
-
-	it("Renders children correctly", () => {
-		const wrapper = shallow(
-			<BodySection title="test title">
-				<p>test children node</p>
-			</BodySection>
-		);
-		expect(wrapper.containsAllMatchingElements([
-			<h2>test title</h2>,
-			<p>test children node</p>
-		])).to.equal(true);
-	});
-
-});
+describe('Testing BodySection component render()', () => {
+  beforeEach(() => {
+    wrapper = null;
+    wrapper = shallow(
+      <BodySection title='title test'><p>Test child</p></BodySection>
+    );
+  })
+  it('should render proper numbers of passed children & static h2 element', () => {
+    expect(wrapper.find('h2').length).toBe(1);
+    expect(wrapper.find('p').length).toBe(1);
+  })
+  it('should render the correct text for h2 element and child elements', () => {
+    expect(wrapper.find('h2').text()).toBe('title test');
+    expect(wrapper.find('p').text()).toBe('Test child');
+  })
+})

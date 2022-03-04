@@ -1,48 +1,39 @@
-import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import NotificationItem from './NotificationItem';
+import NotificationItem from './NotificationItem.js';
+import React from 'react';
+import Notifications from './Notifications'
 
-describe("Testing the <NotificationItem /> Component", () => {
-	
-	let wrapper;
+let wrapper = null;
 
-	it("<NotificationItem /> is rendered without crashing", () => {
-		wrapper = shallow(<NotificationItem idx={2} />);
-		expect(wrapper).to.not.be.an('undefined');
-	});
 
-	it("<NotificationItem /> render the correct HTML, by passing type and value props", () => {
+describe('NotificationItem component tests', () => {
+  it("Checks if the NotificationItem is rendered properly without error", () => {
+    wrapper = shallow(<NotificationItem type='default'/>);
+    expect(wrapper.exists(<NotificationItem type='default'/>));
+  });
 
-		const props = {
-			type: "default",
-			value: "test",
-			html: undefined
-		}
-		wrapper = shallow(<NotificationItem idx={2} {...props}/>);
-		expect(wrapper.html()).equal(`<li data-priority="${props.type}">test</li>`);
-    });
-    
-    it("<NotificationItem /> render the correct HTML, by passing dummy html props", () => {
-		const props = {
-			type: "default",
-			html: { __html: '<u>test</u>' }
-		}
-		wrapper = shallow(<NotificationItem idx={2} {...props}/>);
-		expect(wrapper.html()).equal(`<li data-priority="${props.type}"><u>test</u></li>`);
-	});
+  it("Checks if NotificationItem is rendered with a dummy 'type' and 'value'", () => {
+    wrapper = shallow(<NotificationItem type='default' value='test'/>);
+    expect(wrapper.prop('data-priority')).toBe('default');
+    expect(wrapper.text()).toBe('test');
+  });
 
-	it("Verify that when Clicking on the component, the 'markAsRead' is called with the right ID argument", () => {
-		const props = {
-			type: "urgent",
-			html: { __html: "<p>test</p>"},
-			markAsRead: (id) => { console.log(`Notification ${id} has been marked as read`)}
-		};
-		wrapper = shallow(<NotificationItem idx={2} {...props} />);
-		console.log = jest.fn();
-		wrapper.find('li').simulate('click');
-		expect(console.log.mock.calls[0][0]).equal("Notification 2 has been marked as read");
-		console.log.mockRestore();
-	});
+  it("Checks if NotificationItem is rendered with a dummy custom html set'", () => {
+    wrapper = shallow(<NotificationItem type='default' html={ {__html: '<u>test</u>' } }/>);
+    expect(wrapper.prop('data-priority')).toBe('default');
+    expect(wrapper.html()).toBe('<li data-priority=\"default\"><u>test</u></li>');
+  });
+});
 
+describe('NotificationItem component tests for markAsRead', () => {
+  // create a test, that will pass a spy as the markAsRead property
+//Check that when simulating a click on the component, the spy is called with the right ID argument
+  it('should display the message from markAsRead with the elements corrisponding id', () => {
+    const markAsReadSpy = jest.fn();
+    const wrapper = shallow(<Notifications/>);
+    wrapper.instance().markAsRead = markAsReadSpy;
+    wrapper.instance().markAsRead(1)
+    expect(wrapper.instance().markAsRead).toBeCalledWith(1);
+    markAsReadSpy.mockRestore();
+  });
 });

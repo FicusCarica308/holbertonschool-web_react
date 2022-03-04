@@ -1,10 +1,13 @@
-.App-body {
-    height: 70%;
-    padding: 1rem;
-    font-size: 1.2rem;
-    font-weight: 500;
-}
+/* Login form CSS */
+.login-form {
+    margin: 0px 40px;
+  }
   
-#password {
-    margin-left: 5px;
-}
+  .login-form label {
+    margin-right: 10px
+  }
+  
+  .login-form #password-label {
+    margin-left: 10px;
+  }
+  

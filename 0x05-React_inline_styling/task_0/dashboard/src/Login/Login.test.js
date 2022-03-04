@@ -1,26 +1,23 @@
-import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import Login from './Login';
+import App from './Login';
+import React from 'react';
 
-describe("Testing the <Login /> Component", () => {
-	
-	let wrapper;
+let wrapper = null;
+beforeEach(() => {
+  wrapper = shallow(<App />);
+});
 
-	beforeEach(() => {
-		wrapper = shallow(<Login shouldRender />);
-	});
 
-	it("<Login /> is rendered without crashing", () => {
-		expect(wrapper).to.not.be.an('undefined');
-    });
-    
-    it("the <Login /> component render 2 inputs", () => {
-		expect(wrapper.find('input')).to.have.lengthOf(2);
-    });
-    
-    it("the <Login /> component render 2 labels", () => {
-		expect(wrapper.find('label')).to.have.lengthOf(2);
-	});
+describe('Login Prop', () => {
+  it("Checks if the Login component is rendered properly without error", () => {
+    expect(wrapper.exists('.login-form')).toBeTruthy()
+  });
 
+  it("Renders 2 input tags", () => {
+    expect(wrapper.find('.login-form').children('label').length).toBe(2);
+  });
+
+  it("Renders 2 label tags", () => {
+    expect(wrapper.find('.login-form').children('input').length).toBe(2);
+  });
 });

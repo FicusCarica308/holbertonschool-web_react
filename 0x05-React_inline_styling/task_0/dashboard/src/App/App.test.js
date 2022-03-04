@@ -1,76 +1,56 @@
-import React from 'react';
-import { expect } from 'chai';
-import Adapter from 'enzyme-adapter-react-16';
-import { shallow, configure, mount } from 'enzyme';
+/**
+ * @jest-environment jsdom
+ */
+import { shallow, render, mount } from 'enzyme';
 import App from './App';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
+import Header from '../Header/Header';
 import Notifications from '../Notifications/Notifications';
-import CourseList from '../CourseList/CourseList';
+import React from 'react';
 
-import 'jsdom-global/register'
+let wrapper = null;
 
-configure({adapter: new Adapter()});
+describe('Checks if App component is rendered correctly', () => {
+  it("Checks if App is rendered properly without error", () => {
+    wrapper = shallow(<App/>);
+    expect(wrapper.exists('.App')).toBeTruthy()
+  });
 
-describe("Testing the <App /> Component", () => {
-	
-	let wrapper;
+  it("renders App-Notifications properly", () => {
+    wrapper = shallow(<App/>);
+    expect(wrapper.exists(<Notifications/>));
+  });
 
-	beforeEach(() => {
-		wrapper = shallow(<App />);
-	});
+  it("renders App-header properly", () => {
+    wrapper = shallow(<App/>);
+    expect(wrapper.exists(<Header/>));
+  });
 
-	it("<App /> is rendered without crashing", () => {
-		expect(wrapper).to.not.be.an('undefined');
-	});
+  it("renders App-footer properly", () => {
+    wrapper = shallow(<App/>);
+    expect(wrapper.exists(<Footer/>));
+  });
 
-	it("<App /> contains the <Notifications /> Component", () => {
-		expect(wrapper.contains(<Notifications />)).to.equal(false);
-	});
+  it("renders App-Login properly", () => {
+    wrapper = shallow(<App/>);
+    expect(wrapper.exists(<Login/>));
+  });
 
-	it("<App /> contains the <Header /> Component", () => {
-		expect(wrapper.contains(<Header />)).to.equal(true);
-	});
-
-	it("<App /> contains the <Login /> Component", () => {
-		expect(wrapper.contains(<Login />)).to.equal(true);
-	});
-
-	it("<App /> contains the <Footer /> Component", () => {
-		expect(wrapper.contains(<Footer />)).to.equal(true);
-	});
-
-	it("<App /> does not contain the <CourseList /> Component", () => {
-		expect(wrapper.contains(<CourseList />)).to.equal(false);
-	});
-
+  it("should not display CourseList", () => {
+    wrapper = shallow(<App/>)
+    expect(wrapper.find('.App-body').render().find('#CourseList').length).toBe(0);
+  });
 });
 
-describe("Testing the <App /> Component", () => {
-	
-	let wrapper;
+describe('Checks if App componenet is rendered correctly when (isLoggedIn = true)', () => {
+  it("should not display Login", () => {
+    wrapper = shallow(<App isLoggedIn={true}/>)
+    expect(wrapper.find('.App-body').render().find('.login-form').length).toBe(0);
+  });
 
-	beforeEach(() => {
-		wrapper = shallow(<App isLoggedIn={true}/>);
-	});
-
-	it("<App /> does not contain the <Login /> Component", () => {
-		expect(wrapper.contains(<Login />)).to.equal(false);
-	});
-
-	it("<App /> contains the <CourseList /> Component", () => {
-		expect(wrapper.find('.CourseListContainer').length).to.equal(0);
-	});
-
-});
-
-describe('logOut alerts with correct string', () => {
-	it('logOut', () => {
-		const logOut = jest.fn(() => undefined);
-		const logger = jest.spyOn(global, 'alert');
-		expect(logger);
-		expect(logOut);
-		jest.restoreAllMocks();
-	});
+  it("should display CourseList", () => {
+    wrapper = shallow(<App isLoggedIn={true}/>)
+    expect(wrapper.find('.App-body').render().find('#CourseList').length).toBe(1);
+  });
 });

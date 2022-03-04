@@ -1,24 +1,13 @@
-body {
-  padding: 0;
+/* fonts */
+p, h1 {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.App {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+/* body CSS */
+.App-body {
+  height: 60vh;
 }
 
-.CourseListContainer {
-  height: 70%;
-}
-
-#CourseList {
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-}
-
-#CourseList th {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+.App-body p {
+  margin: 40px 0px 15px 40px;
 }

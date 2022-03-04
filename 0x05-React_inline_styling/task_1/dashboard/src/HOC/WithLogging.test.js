@@ -1,38 +1,34 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { expect as expectChai } from 'chai';
-import WithLogging from './WithLogging';
-import Login from '../Login/Login';
-import 'jsdom-global/register'
-import { StyleSheetTestUtils } from 'aphrodite';
+import { shallow, render } from 'enzyme';
+import WithLogging from './WithLogging'
+import Login from '../Login/Login'
 
-StyleSheetTestUtils.suppressStyleInjection();
+let wrapper = null;
+let consoleMock = null;
 
-describe('Test WithLogging.js', () => {
+beforeEach(() => {
+  wrapper = null;
+  consoleMock = jest.spyOn(console, 'log');
+})
 
-  it('console.log was called on mount and on unmount with Component when the wrapped element is pure html', (done) => {
-    const WrapElement = WithLogging(() => <a></a>);
-    console.log = jest.fn();
-    const wrapper = mount(<WrapElement />);
-    expect(console.log).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith('Component Component is mounted');
+afterEach(() => {
+  consoleMock.mockRestore();
+})
 
+describe('Tests for WithLogging HOC componenet', () => {
+  it('should call console.log if wrappedComponent is pure html', () => {
+    const TestHOC = WithLogging(() => <p/>);
+    wrapper = shallow(<TestHOC />);
+    expect(consoleMock).toHaveBeenCalledTimes(1);
     wrapper.unmount();
-    expect(console.log).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith('Component Component is going to unmount');
-    done();
+    expect(consoleMock).toHaveBeenCalledTimes(2);
   });
-
-  it('console.log was called on mount and on unmount with the name of the component when the wrapped element is the Login component. ', (done) => {
-    const WrapElement = WithLogging(Login);
-    console.log = jest.fn();
-    const wrapper = mount(<WrapElement />);
-    expect(console.log).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith('Component Login is mounted');
-
+  it('should call console.log with componenet name on mount and unmount', () => {
+    const Test2HOC = WithLogging(Login);
+    wrapper = shallow(<Test2HOC />);
+    expect(consoleMock).toHaveBeenCalledWith('Component Login is mounted');
     wrapper.unmount();
-    expect(console.log).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith('Component Login is going to unmount');
-    done();
+    expect(consoleMock).toHaveBeenCalledWith('Component Login is going to unmount');
+    expect(consoleMock).toHaveBeenCalledTimes(2);
   });
 });
