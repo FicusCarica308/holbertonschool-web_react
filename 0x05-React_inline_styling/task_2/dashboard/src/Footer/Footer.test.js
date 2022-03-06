@@ -1,12 +1,13 @@
 import { shallow } from 'enzyme';
-import App from './Footer';
+import Footer from './Footer';
 import React from 'react';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 let wrapper = null;
 StyleSheetTestUtils.suppressStyleInjection();
 
 beforeEach(() => {
-  wrapper = shallow(<App />);
+  wrapper = shallow(<Footer />);
 });
 
 

@@ -8,7 +8,7 @@ function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
       {isHeader === true ? (
         textSecondCell === null ? (
           <tr className={css(styles.tableHeaderRow)}>
-            <th colSpan="2">{textFirstCell}</th>
+            <th colSpan={2}>{textFirstCell}</th>
           </tr>
         ) : (
           <tr className={css(styles.tableHeaderRow)}>

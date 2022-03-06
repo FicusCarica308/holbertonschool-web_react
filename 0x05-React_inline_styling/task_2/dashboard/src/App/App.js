@@ -49,8 +49,8 @@ class App extends React.Component {
           <root-notifications>
             <Notifications listNotifications={listNotifications}/>
           </root-notifications>
-          <div className={css(styles.flexFullHeight)}>
-          <Header className={'App-header ' + css(styles.appHeader)}/>
+          <div className={'App-body ' + css(styles.flexFullHeight)}>
+          <Header className={css(styles.appHeader)}/>
           {this.props.isLoggedIn === false ? (
             <BodySectionWithMarginBottom title="Log in to continue">
               <Login />
@@ -63,7 +63,7 @@ class App extends React.Component {
             <BodySection title="News from the school">
               <p>Random Text</p>
             </BodySection>
-            <Footer className={'App-footer ' + css(styles.footer)}/>
+            <Footer className={css(styles.footer)}/>
             </div>
           </div>
         </>
