@@ -1,4 +1,6 @@
 import React from 'react';
+import { getLatestNotification } from '../utils/utils';
+import { StyleSheet, css } from 'aphrodite';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
@@ -7,8 +9,6 @@ import PropTypes from 'prop-types';
 import CourseList from '../CourseList/CourseList';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
-import { getLatestNotification } from '../utils/utils';
-import { StyleSheet, css } from 'aphrodite';
 
 const listCourses = [
   {id: 1, name: "ES6", credit: 60},
@@ -26,10 +26,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoggedIn: props.isLoggedIn || false,
       displayDrawer: false,
     }
-    this.logOut = props.logOut;
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
@@ -50,7 +48,7 @@ class App extends React.Component {
     if (e.ctrlKey && e.code == "KeyH") {
       e.preventDefault()
       alert("Logging you out");
-      this.logOut();
+      this.props.logOut();
     }
   }
   
@@ -64,29 +62,32 @@ class App extends React.Component {
   
   render() {
     return (
-      <React.Fragment>
-      <Notifications listNotifications={listNotifications}/>
-      <div className={css(styles.flexFullHeight)}>
-      <Header className={css(styles.appHeader)}/>
-      { this.state.isLoggedIn ? (
-        <BodySectionWithMarginBottom title="Course list">
-        <CourseList listCourses={listCourses} className={css(styles.bodyHeight)}/>
-        </BodySectionWithMarginBottom>
-        ) : (
-          <BodySectionWithMarginBottom title="Log in to continue">
-          <Login />
+      <>
+        <Notifications listNotifications={listNotifications}
+                      displayDrawer={this.state.displayDrawer}
+                      handleDisplayDrawer={this.handleDisplayDrawer}
+                      handleHideDrawer={this.handleHideDrawer}
+                      />
+        <div className={css(styles.flexFullHeight)}>
+        <Header className={css(styles.appHeader)}/>
+        { this.state.isLoggedIn ? (
+          <BodySectionWithMarginBottom title="Course list">
+          <CourseList listCourses={listCourses} className={css(styles.bodyHeight)}/>
           </BodySectionWithMarginBottom>
-          )
-        }
-        <BodySection title="News from the school">
-        <p>
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti 
-        atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
-        </p>
-        </BodySection>
-        <Footer className={css(styles.footer)}/>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+            <Login />
+            </BodySectionWithMarginBottom>
+            )
+          }
+          <BodySection title="News from the school">
+          <p>
+            Nothing Yet !
+          </p>
+          </BodySection>
+          <Footer className={css(styles.footer)}/>
         </div>
-        </React.Fragment>
+        </>
         )
       }
     }
@@ -100,7 +101,7 @@ class App extends React.Component {
     App.defaultProps = {
       isLoggedIn: false,
       logOut: () => {
-        return
+        return(undefined);
       }
     }
     
