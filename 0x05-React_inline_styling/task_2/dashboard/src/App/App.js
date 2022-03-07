@@ -98,11 +98,11 @@ const styles = StyleSheet.create({
     color: "#e0354b",
     fontSize: "1.5rem",
     fontWeight: "bold",
-    height: "25%",
   },
   
   footer: {
-    position: "absolute",
+    marginTop: '17%',
+    position: "relative",
     bottom: "0",
     width: "100%",
     borderTop: "3px solid rgb(207, 8, 8); !important",
