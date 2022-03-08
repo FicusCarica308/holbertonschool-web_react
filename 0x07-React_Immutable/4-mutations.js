@@ -9,7 +9,7 @@ export const map = Map({
   6: 'Lucas',
 });
 
-export const map2 = map.set(2, 'Benjamin').set(4, 'Oliver');
+export const map2 = Map(map.set(2, 'Benjamin').set(4, 'Oliver'));
 
 // console.log(map2.get(2));
 // console.log(map2.get(4));
