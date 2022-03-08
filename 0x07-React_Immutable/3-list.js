@@ -1,3 +1,7 @@
+/*
+  *Task 3 - List and push
+  *Two functions that cover immutable lists
+*/
 import { List } from 'immutable';
 
 export function getListObject(array) {
