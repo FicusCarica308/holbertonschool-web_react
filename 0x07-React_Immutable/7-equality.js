@@ -2,7 +2,7 @@
   * Task 7 - Equality
   * Uses is() from immutable.js to determine equality of maps
 */
-import { is, Map } from 'immutable'
+import { is } from 'immutable';
 
 // It accepts two arguments map1 and map2. Both are Immutable.js Maps
 // It should return true if the Maps are equal
