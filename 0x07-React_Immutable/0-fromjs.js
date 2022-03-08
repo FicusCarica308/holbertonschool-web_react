@@ -5,13 +5,11 @@
 */
 import { fromJS } from 'immutable'
 
-function getImmutableObject(obj) {
+export default function getImmutableObject(obj) {
   return (
     fromJS(obj)
   );
 }
-
-export default getImmutableObject;
 
 // console.log(getImmutableObject({
 //   fear: true,
