@@ -14,6 +14,10 @@ export function getListObject(array) {
   );
 }
 
+/*
+  *addElementToList - appends a string to a list and returns it
+  *Arguments: list(type: List), element(type: String)
+*/
 export function addElementToList(list, element) {
   return (
     list.push(element)
