@@ -5,9 +5,9 @@
 */
 import { fromJS } from 'immutable'
 
-export default function getImmutableObject(object) {
+export default function getImmutableObject(obj) {
   return (
-    fromJS(object)
+    fromJS(obj)
   );
 }
 
