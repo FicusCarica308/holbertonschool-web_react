@@ -1,5 +1,5 @@
 /*
-  *Task 4 - Chained mutations 
+  *Task 4 - Chained mutations
   *Mutating a variable one after the other
 */
 import { Map } from 'immutable';
