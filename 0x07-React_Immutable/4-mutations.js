@@ -1,8 +1,8 @@
 /*
-  * Task 4 - Chained mutations 
-  * Mutating a variable one after the other
+  *Task 4 - Chained mutations 
+  *Mutating a variable one after the other
 */
-import { Map } from 'immutable'
+import { Map } from 'immutable';
 
 export const map = Map(
   {
