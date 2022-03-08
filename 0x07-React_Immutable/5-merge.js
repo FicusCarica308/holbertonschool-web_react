@@ -1,6 +1,6 @@
 /*
-* Task 5 - Merge & concat
-* Two functions practicing concating/merging immutable variables
+  * Task 5 - Merge & concat
+  * Two functions practicing concating/merging immutable variables
 */
 import { Map, List } from 'immutable'
 

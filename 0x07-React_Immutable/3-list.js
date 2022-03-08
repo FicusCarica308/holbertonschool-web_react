@@ -1,6 +1,6 @@
 /*
-* Task 3 - List and push
-* Two functions that cover immutable lists
+  * Task 3 - List and push
+  * Two functions that cover immutable lists
 */
 import { List, } from 'immutable'
 

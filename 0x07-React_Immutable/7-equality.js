@@ -1,6 +1,6 @@
 /*
-* Task 7 - Equality
-* Uses is() from immutable.js to determine equality of maps
+  * Task 7 - Equality
+  * Uses is() from immutable.js to determine equality of maps
 */
 import { is, Map } from 'immutable'
 

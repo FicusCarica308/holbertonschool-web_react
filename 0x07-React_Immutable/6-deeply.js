@@ -1,5 +1,5 @@
 /*
-* Task 6 - Nested merge
+  * Task 6 - Nested merge
 */
 import { Map } from 'immutable'
 

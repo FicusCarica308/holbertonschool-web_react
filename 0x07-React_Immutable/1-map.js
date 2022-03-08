@@ -1,7 +1,7 @@
 /*
-* Task 1 - Converting into Immutable using Map
-* A function getImmutableObject that accepts object as a parameter &
-* converts it into an immutable Map using map() of the Immutable.js
+  * Task 1 - Converting into Immutable using Map
+  * A function getImmutableObject that accepts object as a parameter &
+  * converts it into an immutable Map using map() of the Immutable.js
 */
 import { Map } from 'immutable'
 
