@@ -4,6 +4,10 @@
 */
 import { List } from 'immutable';
 
+/*
+  *getListObject - accepts an array as parameter and converts
+  *it into an immutable List using the Immutable.js library
+*/
 export function getListObject(array) {
   return (
     List(array)
