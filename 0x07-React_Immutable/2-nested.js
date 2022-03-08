@@ -5,14 +5,14 @@
 import { getIn, fromJS } from 'immutable';
 
 export default function accessImmutableObject(object, array) {
-  return(
+  return (
     fromJS(getIn(object, array))
   );
 }
 
-console.log(
-  accessImmutableObject(
-    {name: {first: "Guillaume", last: "Salva"}},
-    ['name', 'first']
-  )
-);
+// console.log(
+//   accessImmutableObject(
+//     {name: {first: "Guillaume", last: "Salva"}},
+//     ['name', 'first']
+//   )
+// );
