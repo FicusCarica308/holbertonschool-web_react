@@ -29,7 +29,7 @@ class Notifications extends React.Component {
           { this.props.displayDrawer ? <></> : <p>Your Notifications</p> }
         </div>
           {this.props.displayDrawer ? (
-              <div className={'Notifications ' + css(styles.Notifications)} display={this.props.displayDrawer}>
+              <div className={'Notifications ' + css(styles.Notifications)} display={`${this.props.displayDrawer}`}>
                 <ul className={'notification-list ' + css(styles.listStyle)}>
                   { this.props.listNotifications.length === 0 ? (
                       <NotificationItem type='default' value='No new notifications for now' />
