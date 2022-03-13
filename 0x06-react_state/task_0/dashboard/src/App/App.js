@@ -24,7 +24,24 @@ const listNotifications = [
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      displayDrawer: false
+    };
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this)
+    this.handleHideDrawer = this.handleHideDrawer.bind(this)
+  }
+
+  handleDisplayDrawer() {
+    this.setState({
+      displayDrawer: true,
+    });
+  }
+
+  handleHideDrawer() {
+    this.setState({
+      displayDrawer: false,
+    });
   }
   
   logoutHandler(event) {
@@ -47,7 +64,12 @@ class App extends React.Component {
       <>
         <div className='App'>
           <root-notifications>
-            <Notifications listNotifications={listNotifications}/>
+            <Notifications
+              displayDrawer={this.state.displayDrawer}
+              listNotifications={listNotifications}
+              handleDisplayDrawer={this.handleDisplayDrawer}
+              handleHideDrawer={this.handleHideDrawer}
+            />
           </root-notifications>
           <div className={'App-body ' + css(styles.body)}>
           <Header className={css(styles.appHeader)}/>

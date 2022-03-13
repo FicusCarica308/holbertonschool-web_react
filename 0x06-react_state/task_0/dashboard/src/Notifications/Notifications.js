@@ -12,11 +12,13 @@ class Notifications extends React.Component {
     this.markAsRead = this.markAsRead.bind(this);
   }
   shouldComponentUpdate(nextProps) {
-    if (nextProps.listNotifications.length > this.props.listNotifications.length) {
-      return true;
-    } else {
-      return false;
+    if (nextProps.displayDrawer !== this.props.displayDrawer) {
+      return (true);
     }
+    if (nextProps.listNotifications.length > this.props.listNotifications.length) {
+      return (true);
+    }
+    return false;
   }
   markAsRead (id) {
     console.log(`Notification $${id} has been marked as read`);
@@ -25,7 +27,7 @@ class Notifications extends React.Component {
     return (
       <React.Fragment>
         <div className={css(this.props.displayDrawer ? styles.NotificationsDivResponsive : styles.NotificationsDiv )}>
-        <div className={'menuItem ' + css(styles.menuItem)}>
+        <div className={'menuItem ' + css(styles.menuItem)} onClick={this.props.handleDisplayDrawer}>
           { this.props.displayDrawer ? <></> : <p>Your Notifications</p> }
         </div>
           {this.props.displayDrawer ? (
@@ -51,9 +53,7 @@ class Notifications extends React.Component {
                 <button
                     className={css(styles.buttonStyle)}
                     aria-label="Close"
-                    onClick={() => {
-                      console.log('Close button has been clicked');
-                    }}
+                    onClick={this.props.handleHideDrawer}
                   >
                   <img className={css(styles.buttonImg)} src={closeIcon} alt='closeIcon' style={{width: '20px', height: '20px',}} />
                 </button>
@@ -66,16 +66,20 @@ class Notifications extends React.Component {
       </React.Fragment>
     );
   }
-} 
-
-Notifications.propTypes = {
-    displayDrawer: PropTypes.bool,
-    listNotifications: PropTypes.arrayOf(NotificationItemShape)
 }
 
 Notifications.defaultProps = {
     displayDrawer: false,
-    listNotifications: []
+    listNotifications: [],
+    handleDisplayDrawer: () => null,
+    handleHideDrawer: () => null
+}
+
+Notifications.propTypes = {
+    displayDrawer: PropTypes.bool,
+    listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    handleHideDrawer: PropTypes.func,
+    handleDisplayDrawer: PropTypes.func,
 }
 
 const bounce = {
