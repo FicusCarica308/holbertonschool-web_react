@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { StyleSheetTestUtils } from 'aphrodite';
 import Notifications from './Notifications'
 import NotificationItem from './NotificationItem';
@@ -69,7 +69,6 @@ describe('Notification HTML with no listNotifications passed', () => {
 });
 
 describe('Notification HTML displayDrawer tests', () => {
-    //
   it("menu item is being displayed when displayDrawer is false", () => {
     wrapper = shallow(<Notifications displayDrawer={true}/>)
     expect(wrapper.render().find('.menuItem').length).toBe(1);
@@ -80,7 +79,6 @@ describe('Notification HTML displayDrawer tests', () => {
     expect(wrapper.find('.Notifications').length).toBe(0);
   });
 
-    // 
   it("menu item is being displayed when displayDrawer is true", () => {
     wrapper = shallow(<Notifications displayDrawer={true}/>)
     wrapper.update();
@@ -138,4 +136,29 @@ describe('Notification Component markAsRead function tests', () => {
       expect(componentUpdateSpy).toHaveLastReturnedWith(true);
     });
   })
+});
+
+describe('checks if handleHideDrawer() & handleDisplayDrawer() functions are called properly', () => {
+  const spyDisplayDrawer =  jest.fn();
+  const spyHideDrawer = jest.fn();
+
+  beforeEach(() => {
+    wrapper = mount(<Notifications displayDrawer={true}
+                    handleDisplayDrawer={spyDisplayDrawer}
+                    handleHideDrawer={spyHideDrawer}/>);
+   });
+
+   afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+   it('calls handleHideDrawer() is called when Notifications close button is pressed', () => {
+    wrapper.find('#hide-notifications').simulate('click');
+    expect(spyHideDrawer).toHaveBeenCalled();
+   });
+
+   it('calls handleDisplayDrawer() is called when "Your Notifications" <p> element', () => {
+    wrapper.find('.menuItem').simulate('click');
+    expect(spyDisplayDrawer).toHaveBeenCalled();
+   });
 });
