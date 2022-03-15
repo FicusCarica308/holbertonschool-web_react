@@ -51,6 +51,7 @@ class Notifications extends React.Component {
                     )}
                 </ul>
                 <button
+                    id='hide-notifications'
                     className={css(styles.buttonStyle)}
                     aria-label="Close"
                     onClick={this.props.handleHideDrawer}
