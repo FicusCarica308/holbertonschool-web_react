@@ -2,16 +2,62 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-function Login() {
-  return (
-    <form className={'login-form ' + css(styles.loginForm)}>
-      <label className={css(styles.labelEmail)} htmlFor='email' id='email-label'>Email:</label>
-      <input type='email' name='email' id='email'></input>
-      <label className={css(styles.loginLabel) + ' ' + css(styles.loginPassword)} htmlFor='password' id='password-label'>Password:</label>
-      <input type='text' name='password' id='password'></input>
-      <button className={css(styles.loginBtn)}>OK</button>
-    </form>
-  );
+class Login extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      enableSubmit: false,
+      email: '',
+      password: '',
+    }
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.checkInputStatus = this.checkInputStatus.bind(this);
+  }
+
+  //handles when login form submit button is pressed
+  handleLoginSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      isLoggedIn: true,
+    });
+  }
+
+  //checks if input.target.value is empty and sets enable submit accordingly
+  checkInputStatus(event, PassOrEmail) {
+    if (event.target.value === '' || this.state[PassOrEmail] === '') {
+      return (false);
+    }
+    return (true);
+  }
+
+  handleChangeEmail(event) {
+    this.setState({
+      email: event.target.value,
+      enableSubmit: this.checkInputStatus(event, 'password'),
+    })
+  }
+
+  handleChangePassword(event) {
+    this.setState({
+      password: event.target.value,
+      enableSubmit: this.checkInputStatus(event, 'email'),
+    })
+  }
+
+  render () {
+    return (
+      <form className={'login-form ' + css(styles.loginForm)} onSubmit={this.handleLoginSubmit}>
+        <label className={css(styles.labelEmail)} htmlFor='email' id='email-label'>Email:</label>
+        <input type='email' name='email' id='email' onChange={this.handleChangeEmail} value={this.state.email}></input>
+        <label className={css(styles.loginLabel, styles.loginPassword)} htmlFor='password' id='password-label'>Password:</label>
+        <input type='text' name='password' id='password' onChange={this.handleChangePassword} value={this.state.password}></input>
+        <input type='submit' value='OK' id="form-submit" className={css(styles.loginBtn)} disabled={!this.state.enableSubmit}></input>
+      </form>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
