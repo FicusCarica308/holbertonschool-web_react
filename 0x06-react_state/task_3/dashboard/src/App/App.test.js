@@ -102,3 +102,22 @@ describe('Tests for App this.state changes (logOut() and logIn() methods)', () =
     expect(wrapper.state('user').isLoggedIn).toBe(false);
   });
 });
+
+describe('Tests if markNotificationAsRead() class method works as intended', () => {
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  });
+  it('Calling markNotificationAsRead() should remove the notification with the given id from this.state', () => {
+    const mockNotifications = [
+      {id: 1, type: 'default', value: 'test1'},
+      {id: 2, type: 'default', value: 'test2'}
+    ]
+    wrapper.setState({
+      listNotifications: mockNotifications
+    });
+    expect(wrapper.state('listNotifications')).toBe(mockNotifications);
+    wrapper.instance().markNotificationAsRead(1); // removed notification with id == 1 in mockNotifications
+    mockNotifications.shift() //removes first notification from mockNotifications
+    expect(wrapper.state('listNotifications')).toBe(mockNotifications);
+  });
+});

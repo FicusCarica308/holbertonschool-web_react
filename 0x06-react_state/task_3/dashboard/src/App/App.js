@@ -10,19 +10,12 @@ import BodySection from '../BodySection/BodySection';
 import { getLatestNotification } from '../utils/utils.js';
 import {AppContext, defaultUser, defaultLogOut} from './AppContext';
 
-// Default values for Courses and Notifications
+// Default values for Courses
 const listCourses = [
   {id: 1, name:"ES6", credit: 60},
   {id: 2, name:"Webpack", credit: 20},
   {id: 3, name:"React", credit: 40}
 ]
-
-const listNotifications = [
-  {id: 1, type: 'default', value: 'New course available'},
-  {id: 2, type: 'urgent',  value: 'New resume available'},
-  {id: 3, type: 'urgent', html: {__html: getLatestNotification()}}
-]
-
 // ==============================================
 
 class App extends React.Component {
@@ -31,10 +24,16 @@ class App extends React.Component {
     this.state = {
       displayDrawer: false,
       logOut: defaultLogOut,
-      user: defaultUser
+      user: defaultUser,
+      listNotifications: [
+        {id: 1, type: 'default', value: 'New course available'},
+        {id: 2, type: 'urgent',  value: 'New resume available'},
+        {id: 3, type: 'urgent', html: {__html: getLatestNotification()}}
+      ]
     };
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.logIn = this.logIn.bind(this);
   }
 
@@ -48,6 +47,12 @@ class App extends React.Component {
   handleHideDrawer() {
     this.setState({
       displayDrawer: false,
+    });
+  }
+
+  markNotificationAsRead(id) {
+    this.state.listNotifications.filter((item) => {
+      item.id !== id
     });
   }
 
@@ -88,9 +93,10 @@ class App extends React.Component {
           <root-notifications>
             <Notifications
               displayDrawer={this.state.displayDrawer}
-              listNotifications={listNotifications}
+              listNotifications={this.state.listNotifications}
               handleDisplayDrawer={this.handleDisplayDrawer}
               handleHideDrawer={this.handleHideDrawer}
+              markNotificationAsRead={this.markNotificationAsRead}
             />
           </root-notifications>
           <div className={'App-body ' + css(styles.body)}>

@@ -11,7 +11,6 @@ export default class Header extends React.Component{
   render () {
     let user = this.context.user;
     let logOut = this.context.logOut;
-    console.log(logOut)
     return (
       <>
         <div className={'App-header ' + this.props.className}>
