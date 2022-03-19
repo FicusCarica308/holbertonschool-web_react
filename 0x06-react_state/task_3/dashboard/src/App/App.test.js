@@ -118,6 +118,6 @@ describe('Tests if markNotificationAsRead() class method works as intended', () 
     expect(wrapper.state('listNotifications')).toBe(mockNotifications);
     wrapper.instance().markNotificationAsRead(1); // removed notification with id == 1 in mockNotifications
     mockNotifications.shift() //removes first notification from mockNotifications
-    expect(wrapper.state('listNotifications')).toBe(mockNotifications);
+    expect(wrapper.state('listNotifications')).toStrictEqual(mockNotifications);
   });
 });

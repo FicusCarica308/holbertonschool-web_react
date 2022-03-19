@@ -9,19 +9,6 @@ import NotificationItemShape from './NotificationItemShape'
 class Notifications extends React.Component {
   constructor (props) {
     super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.displayDrawer !== this.props.displayDrawer) {
-      return (true);
-    }
-    if (nextProps.listNotifications.length > this.props.listNotifications.length) {
-      return (true);
-    }
-    return false;
-  }
-  markAsRead (id) {
-    console.log(`Notification $${id} has been marked as read`);
   }
   render () {
     return (
@@ -44,7 +31,7 @@ class Notifications extends React.Component {
                                             html={notification.html}
                                             type={notification.type}
                                             value={notification.value}
-                                            markAsRead={this.markAsRead}
+                                            markAsRead={this.props.markNotificationAsRead}
                           />
                         )}
                       </React.Fragment>
@@ -72,8 +59,9 @@ class Notifications extends React.Component {
 Notifications.defaultProps = {
     displayDrawer: false,
     listNotifications: [],
-    handleDisplayDrawer: () => null,
-    handleHideDrawer: () => null
+    handleDisplayDrawer: () => {return undefined},
+    handleHideDrawer: () => {return undefined},
+    markNotificationAsRead: () => {return undefined},
 }
 
 Notifications.propTypes = {
@@ -81,6 +69,7 @@ Notifications.propTypes = {
     listNotifications: PropTypes.arrayOf(NotificationItemShape),
     handleHideDrawer: PropTypes.func,
     handleDisplayDrawer: PropTypes.func,
+    markNotificationAsRead: PropTypes.func,
 }
 
 const bounce = {

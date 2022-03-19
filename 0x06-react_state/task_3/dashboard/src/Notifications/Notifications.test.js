@@ -91,51 +91,14 @@ describe('Notification HTML displayDrawer tests', () => {
   });
 });
 
-describe('Notification Component markAsRead function tests', () => {
+describe('Notification Component markAsRead(id) function tests', () => {
   it('Tests if markAsRead can be called from an instance of Notifications with the correct message', () => {
-    const logSpy = jest.spyOn(console, 'log');
-    const notificationInstance = new Notifications;
+    const spy = jest.fn();
+    wrapper = mount(<Notifications displayDrawer={true} listNotifications={listNotifications} markNotificationAsRead={spy}/>)
 
-    notificationInstance.markAsRead(3);
-    expect(logSpy).toHaveBeenCalledWith('Notification $3 has been marked as read');
+    wrapper.prop('markNotificationAsRead')(3);
+    expect(spy).toHaveBeenCalledWith(3);
   });
-
-  describe('Tests Notification Component selective rendering feature', () => {
-  
-    let componentUpdateSpy = null;
-  
-    beforeEach(() => {
-      componentUpdateSpy = jest.spyOn(
-        Notifications.prototype,
-        "shouldComponentUpdate"
-      );
-      wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>)
-    })
-
-    afterEach(() => {
-      jest.restoreAllMocks();
-    })
-
-    it('doesnt rerender on same listNotifications', () => {
-      let testShorterList = [
-        {id: 1, type: 'default', value: 'New course available'},
-        {id: 2, type: 'urgent',  value: 'New resume available'},
-      ]
-      wrapper.setProps({ listNotifications: testShorterList });
-      expect(componentUpdateSpy).toHaveLastReturnedWith(false);
-    });
-
-    it('rerenders with longer listNotifications prop', () => {
-      let testLongerList = [
-        {id: 1, type: 'default', value: 'New course available'},
-        {id: 2, type: 'urgent',  value: 'New resume available'},
-        {id: 3, type: 'default', value: 'New course available'},
-        {id: 4, type: 'default', value: 'New course available'},
-      ]
-      wrapper.setProps({ listNotifications: testLongerList });
-      expect(componentUpdateSpy).toHaveLastReturnedWith(true);
-    });
-  })
 });
 
 describe('checks if handleHideDrawer() & handleDisplayDrawer() functions are called properly', () => {
