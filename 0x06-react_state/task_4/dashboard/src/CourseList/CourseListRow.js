@@ -28,7 +28,7 @@ function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
       ) : (
         <tr className={checkboxStatus ? css(styles.tableRow) : css(styles.rowChecked)}>
           <td><input type="checkbox" onChange={handleCheckboxStatus}/>{textFirstCell}</td>
-          <td><input type="checkbox" onChange={handleCheckboxStatus}/>{textSecondCell}</td>
+          <td>{textSecondCell}</td>
         </tr>
       )}
     </>
