@@ -11,7 +11,7 @@ export default class Header extends React.Component{
   render () {
     let user = this.context.user;
     let logOut = this.context.logOut;
-    console.log(logOut)
+
     return (
       <>
         <div className={'App-header ' + this.props.className}>
@@ -20,7 +20,7 @@ export default class Header extends React.Component{
         </div>
         {
           user.isLoggedIn ? //IF
-              <p>Welcome {user.email} <span onClick={logOut}>(logout)</span></p>
+              <p id='logoutSection'>Welcome {user.email} <span onClick={logOut}>(logout)</span></p>
             : //ELSE
               <p>Not signed in</p>
         }
