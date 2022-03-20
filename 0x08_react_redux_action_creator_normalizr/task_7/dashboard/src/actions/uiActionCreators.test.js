@@ -1,28 +1,36 @@
 import { login, logout, displayNotificationDrawer, hideNotificationDrawer, loginRequest, loginSuccess, loginFailure } from './uiActionCreators'
-import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from './courseActionTypes'
+import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from './uiActionTypes'
 import thunk from 'redux-thunk'
 import configureStore from 'redux-mock-store'
-import fetchMock from 'fetch-mock-jest'
+import { expect } from '@jest/globals'
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('Tests for loginRequest() function', () => {
-  it('API returns the right response & store on success', () => {
-    const store = mockStore({});
-    jest.mock('node-fetch', () => require('fetch-mock').sandbox())
-    fetchMock.get('/login-success.json', 200)
-    store.dispatch(loginRequest('test@test.com', 'testpassword'))
-      .then((res) => {
-        console.log(res);
-      })
-      .then(() => {
-        expect(store.getActions()[0].toEqual(loginSuccess()));
-      })
-      .catch(() => {
-        expect(store.getActions()[0].toEqual(loginFailure()))
-      })
-  });
+  it('Gives proper response on loginSuccess', () => {
+    fetch.mockResponse(JSON.stringify({test: 'test'}));
+    const store = mockStore({})
+    return (
+      store.dispatch(loginRequest('test@test.com', 'testpassword'))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[1]).toEqual(loginSuccess());
+          expect(actions[0]).toEqual(login('test@test.com', 'testpassword'));
+        })
+    )
+  })
+  it('Gives proper response on loginFailure', () => {
+    fetch.mockReject(JSON.stringify({test: 'test'}));
+    const store = mockStore({})
+    return (
+      store.dispatch(loginRequest('test@test.com', 'testpassword'))
+        .catch(() => {
+          const actions = store.getActions()
+          expect(actions[1]).toEqual(loginFailure());
+        })
+    )
+  })
 });
 
 describe('Tests for login([email], [password]) function', () => {

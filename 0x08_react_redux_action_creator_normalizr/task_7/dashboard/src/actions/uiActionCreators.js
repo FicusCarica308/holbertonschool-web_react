@@ -1,9 +1,14 @@
-import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS, LOGIN_FAILURE} from './courseActionTypes'
+import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS, LOGIN_FAILURE} from './uiActionTypes.js'
 import { bindActionCreators } from 'redux'
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 
 function login(email, password) {
-  return ({ type: LOGIN, user: { email, password } });
+  return {
+      type: LOGIN,
+      user: {
+          email, password 
+        }
+    }
 }
 
 function logout() {
